@@ -1,0 +1,23 @@
+name: HPView
+version: '${project.version}'
+main: dev.spa.hpview.HPViewPlugin
+api-version: "1.21"
+author: spa
+description: 攻撃した相手の残りHPをアクションバーに表示する
+
+commands:
+  hpview:
+    description: HP表示のオン・オフを切り替える
+    usage: /hpview [on|off]
+    permission: hpview.toggle
+
+permissions:
+  hpview.use:
+    description: 攻撃した相手のHPが表示される
+    default: true
+  hpview.toggle:
+    description: /hpview で自分の表示を切り替えられる
+    default: true
+  hpview.reload:
+    description: /hpview reload で設定を読み直せる
+    default: op
