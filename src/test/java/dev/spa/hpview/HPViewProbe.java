@@ -2,9 +2,12 @@ package dev.spa.hpview;
 
 import java.lang.reflect.Proxy;
 import java.nio.file.Files;
+import com.google.common.base.Functions;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Level;
 import net.kyori.adventure.text.Component;
@@ -21,6 +24,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -125,8 +129,11 @@ public final class HPViewProbe extends JavaPlugin {
     }
 
     private void fire(Entity target) {
+        // 非推奨でないのはこの形だけ（ダメージは基礎値1、補正なし）
         Bukkit.getPluginManager().callEvent(new EntityDamageByEntityEvent(viewer, target,
-                DamageCause.ENTITY_ATTACK, DamageSource.builder(DamageType.PLAYER_ATTACK).build(), 1));
+                DamageCause.ENTITY_ATTACK, DamageSource.builder(DamageType.PLAYER_ATTACK).build(),
+                new EnumMap<>(Map.of(DamageModifier.BASE, 1.0)),
+                new EnumMap<>(Map.of(DamageModifier.BASE, Functions.<Double>identity())), false));
     }
 
     private void expectBar(int index, String text, TextColor color) {
