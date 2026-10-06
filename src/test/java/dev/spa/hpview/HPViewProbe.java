@@ -4,6 +4,7 @@ import java.lang.reflect.Proxy;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import java.util.logging.Level;
 import net.kyori.adventure.text.Component;
@@ -29,7 +30,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class HPViewProbe extends JavaPlugin {
 
     private final List<Component> actionBars = new ArrayList<>();
+    private final List<Component> messages = new ArrayList<>();
     private final UUID viewerId = UUID.randomUUID();
+    private Locale viewerLocale = Locale.US;
     private Player viewer;
     private HPViewPlugin hpview;
 
@@ -84,6 +87,8 @@ public final class HPViewProbe extends JavaPlugin {
             HPViewCommand command = new HPViewCommand(hpview);
             command.onCommand(viewer, null, "hpview", new String[0]);
             expect(!hpview.isEnabledFor(viewerId), "/hpview でオフになる");
+            expect(plain(messages.getLast()).equals("HP display for attacked targets is now off."),
+                    "英語のクライアントには英語で返す: " + plain(messages.getLast()));
             String saved = Files.readString(hpview.getDataFolder().toPath().resolve("players.yml"));
             expect(saved.contains(viewerId.toString()), "オフにした人が players.yml に残る");
 
@@ -93,8 +98,19 @@ public final class HPViewProbe extends JavaPlugin {
             Bukkit.getScheduler().runTaskLater(this, () -> {
                 try {
                     expect(actionBars.size() == 4, "オフの間は出ない");
+                    viewerLocale = Locale.JAPAN;
                     command.onCommand(viewer, null, "hpview", new String[] {"on"});
                     expect(hpview.isEnabledFor(viewerId), "/hpview on でオンに戻る");
+                    expect(plain(messages.getLast()).equals("攻撃した相手のHP表示をオンにしました。"),
+                            "日本語のクライアントには日本語で返す: " + plain(messages.getLast()));
+                    viewerLocale = Locale.SIMPLIFIED_CHINESE;
+                    command.onCommand(viewer, null, "hpview", new String[] {"bad"});
+                    expect(plain(messages.getLast()).equals("用法：/hpview [on|off]"),
+                            "中国語のクライアントには中国語で返す: " + plain(messages.getLast()));
+                    viewerLocale = Locale.KOREA;
+                    command.onCommand(viewer, null, "hpview", new String[] {"off"});
+                    expect(plain(messages.getLast()).equals("공격한 대상의 HP 표시를 껐습니다."),
+                            "韓国語のクライアントには韓国語で返す: " + plain(messages.getLast()));
                     getLogger().info("HPVIEW_PROBE_PASS");
                 } catch (Throwable error) {
                     fail(error);
@@ -149,7 +165,13 @@ public final class HPViewProbe extends JavaPlugin {
                     case "hasPermission", "isOnline" -> true;
                     case "equals" -> proxy == args[0];
                     case "hashCode" -> System.identityHashCode(proxy);
-                    case "sendMessage" -> null;
+                    case "locale" -> viewerLocale;
+                    case "sendMessage" -> {
+                        if (args.length == 1 && args[0] instanceof Component message) {
+                            messages.add(message);
+                        }
+                        yield null;
+                    }
                     default -> throw new UnsupportedOperationException(method.getName());
                 });
     }

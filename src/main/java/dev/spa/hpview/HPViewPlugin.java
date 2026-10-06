@@ -57,7 +57,7 @@ public final class HPViewPlugin extends JavaPlugin {
             try {
                 disabled.add(UUID.fromString(id));
             } catch (IllegalArgumentException ignored) {
-                getLogger().warning("players.yml の不正なUUIDを無視しました: " + id);
+                getLogger().warning("Ignored invalid UUID in players.yml: " + id);
             }
         }
     }
@@ -68,7 +68,7 @@ public final class HPViewPlugin extends JavaPlugin {
         try {
             yaml.save(playersFile);
         } catch (IOException error) {
-            getLogger().log(Level.WARNING, "players.yml を保存できませんでした", error);
+            getLogger().log(Level.WARNING, "Could not save players.yml", error);
         }
     }
 }

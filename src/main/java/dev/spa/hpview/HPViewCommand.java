@@ -22,26 +22,26 @@ public final class HPViewCommand implements TabExecutor {
         String action = args.length == 0 ? "toggle" : args[0].toLowerCase();
         if (action.equals("reload")) {
             if (!sender.hasPermission("hpview.reload")) {
-                sender.sendMessage(Component.text("権限がありません。", NamedTextColor.RED));
+                sender.sendMessage(Component.text(Messages.NO_PERMISSION.text(sender), NamedTextColor.RED));
                 return true;
             }
             plugin.reloadSettings();
-            sender.sendMessage(Component.text("HPViewの設定を読み直しました。", NamedTextColor.GREEN));
+            sender.sendMessage(Component.text(Messages.RELOADED.text(sender), NamedTextColor.GREEN));
             return true;
         }
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(Component.text("プレイヤーだけが使えます。", NamedTextColor.RED));
+            sender.sendMessage(Component.text(Messages.PLAYERS_ONLY.text(sender), NamedTextColor.RED));
             return true;
         }
         if (!List.of("on", "off", "toggle").contains(action)) {
-            sender.sendMessage(Component.text("使い方: /" + label + " [on|off]", NamedTextColor.RED));
+            sender.sendMessage(Component.text(Messages.USAGE.text(sender, label), NamedTextColor.RED));
             return true;
         }
         boolean enabled = action.equals("toggle") ? !plugin.isEnabledFor(player.getUniqueId()) : action.equals("on");
         plugin.setEnabledFor(player.getUniqueId(), enabled);
         player.sendMessage(enabled
-                ? Component.text("攻撃した相手のHP表示をオンにしました。", NamedTextColor.GREEN)
-                : Component.text("攻撃した相手のHP表示をオフにしました。", NamedTextColor.GRAY));
+                ? Component.text(Messages.ENABLED.text(player), NamedTextColor.GREEN)
+                : Component.text(Messages.DISABLED.text(player), NamedTextColor.GRAY));
         return true;
     }
 

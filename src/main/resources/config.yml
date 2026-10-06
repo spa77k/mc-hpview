@@ -1,11 +1,11 @@
-# アクションバーに出す文字列（MiniMessage形式）
-# <name>: 相手の名前（名前付きMobは付けた名前、それ以外はプレイヤーの言語でのMob名）
-# <color>〜</color>: 残りHPの割合に応じた色
-# <hp>: 残りHP  <max>: 最大HP
+# Text shown on the action bar (MiniMessage format)
+# <name>: target name (custom name for named mobs, otherwise the mob name in each player's language)
+# <color>...</color>: color based on the remaining HP ratio
+# <hp>: remaining HP  <max>: max HP
 format: "<white><name></white> <color>❤ <hp>/<max></color>"
 
-# 残りHPの割合（0.0〜1.0）による色の境目
-# high 以上は high-color、low 以上は mid-color、それ未満は low-color
+# Color thresholds by remaining HP ratio (0.0-1.0)
+# At or above high: colors.high, at or above low: colors.mid, below low: colors.low
 thresholds:
   high: 0.5
   low: 0.25
@@ -14,8 +14,8 @@ colors:
   mid: "#FFFF55"
   low: "#FF5555"
 
-# HPの小数点以下の桁数
+# Decimal places for HP (0-2)
 decimals: 1
 
-# プレイヤーを攻撃したときも表示する
+# Also show HP when attacking players
 show-players: true
