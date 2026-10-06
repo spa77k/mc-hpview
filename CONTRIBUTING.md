@@ -1,10 +1,13 @@
 # Contributing to HPView
 
+**English** | [日本語](CONTRIBUTING.ja.md) | [简体中文](CONTRIBUTING.zh-CN.md) | [한국어](CONTRIBUTING.ko.md)
+
 Thanks for your interest in HPView. Bug reports, translations and pull requests are welcome.
 
 ## Reporting bugs and requesting features
 
 - Use the issue templates on the [Issues](https://github.com/spa77k/mc-hpview/issues/new/choose) page.
+- You can write issues and pull requests in English, Japanese, Chinese or Korean.
 - For bugs, include your Paper version, Java version, whether the player joined through Geyser, and steps to reproduce.
 - For security problems, do not open a public issue. See [SECURITY.md](SECURITY.md).
 

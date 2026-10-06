@@ -1,5 +1,7 @@
 # Security Policy
 
+**English** | [日本語](SECURITY.ja.md) | [简体中文](SECURITY.zh-CN.md) | [한국어](SECURITY.ko.md)
+
 ## Supported versions
 
 Only the latest release on the [Releases](https://github.com/spa77k/mc-hpview/releases) page receives fixes.
