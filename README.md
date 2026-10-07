@@ -10,7 +10,7 @@ Zombie ❤ 12.0/20.0
 
 ## Requirements
 
-- Minecraft server: PaperMC 26.2 (Paper API `1.21.4` or later)
+- Minecraft server: PaperMC 26.2 and 26.3 (Paper API `1.21.4` or later)
 - Java: 21 or later
 - Dependencies: none
 - Also works for Bedrock players connected through Geyser

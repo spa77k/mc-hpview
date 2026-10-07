@@ -10,7 +10,7 @@
 
 ## 运行环境
 
-- Minecraft 服务器：PaperMC 26.2（Paper API `1.21.4` 及以上）
+- Minecraft 服务器：PaperMC 26.2、26.3（Paper API `1.21.4` 及以上）
 - Java：21 及以上
 - 前置插件：无
 - 通过 Geyser 进入的基岩版玩家同样可以看到

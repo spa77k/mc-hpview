@@ -10,7 +10,7 @@ PaperMC サーバー向けの、攻撃した相手の残りHPをアクション�
 
 ## 動作環境
 
-- Minecraft サーバー: PaperMC 26.2（Paper API `1.21.4` 以降）
+- Minecraft サーバー: PaperMC 26.2・26.3（Paper API `1.21.4` 以降）
 - Java: 21 以降
 - 依存プラグイン: なし
 - 統合版（Geyser 経由）のプレイヤーにも表示されます

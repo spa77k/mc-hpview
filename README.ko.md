@@ -10,7 +10,7 @@
 
 ## 요구 사항
 
-- Minecraft 서버: PaperMC 26.2 (Paper API `1.21.4` 이상)
+- Minecraft 서버: PaperMC 26.2·26.3 (Paper API `1.21.4` 이상)
 - Java: 21 이상
 - 의존 플러그인: 없음
 - Geyser로 접속한 베드락 에디션 플레이어에게도 표시됩니다
