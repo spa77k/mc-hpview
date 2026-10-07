@@ -2,7 +2,7 @@
 
 [English](README.md) | [日本語](README.ja.md) | **简体中文** | [한국어](README.ko.md)
 
-一款 PaperMC 插件，在动作栏上显示你所攻击目标的剩余生命值。
+一款 PaperMC 插件，在动作栏上显示所攻击目标的剩余生命值。
 
 ```
 僵尸 ❤ 12.0/20.0
@@ -13,45 +13,47 @@
 - Minecraft 服务器：PaperMC 26.2、26.3（Paper API `1.21.4` 及以上）
 - Java：21 及以上
 - 前置插件：无
-- 通过 Geyser 进入的基岩版玩家同样可以看到
+- 基岩版兼容：通过 Geyser 接入的基岩版玩家同样可以正常显示
 
 ## 功能
 
-- 攻击生物或玩家时，攻击者的动作栏上会显示对方的名称和剩余生命值。
-- 除了剑等近战攻击外，弓、弩、三叉戟等弹射物以及驯服的狼等宠物的攻击也会显示。
-- 生命值的颜色随剩余比例变化（50% 及以上：绿色，25% 及以上：黄色，低于 25%：红色）。
-- 已命名的生物显示其自定义名称，其他生物按各玩家的游戏语言显示名称。
-- 击杀目标时显示 `0.0`。存活目标的生命值会向上取整，因此存活时不会显示 `0.0`。
-- 不包括盔甲架。
-- 命令提示会根据各玩家的游戏语言显示为英语、日语、简体中文或韩语（其他语言显示英语）。
+- 攻击生物或玩家时，攻击者的动作栏上会显示目标的名称及剩余生命值。
+- 支持近战攻击（如剑）、弹射物（弓、弩、三叉戟等）以及已驯服宠物（如狼）的攻击。
+- 生命值颜色会根据剩余生命值比例动态变化（默认：50% 及以上为绿色，25% 及以上为黄色，低于 25% 为红色）。
+- 已命名的生物显示其自定义名称，未命名的生物则按照各玩家客户端的游戏语言显示对应名称。
+- 击杀目标时显示 `0.0`。存活目标的生命值向上取整，避免存活状态下显示为 `0.0`。
+- 忽略盔甲架。
+- 插件提示信息会根据玩家客户端语言显示英语、日语、简体中文或韩语（其他语言默认为英语）。
 
 ## 安装
 
-1. 从 [Releases](https://github.com/spa77k/mc-hpview/releases) 下载 `hpview-1.0.1.jar`
-2. 放入服务器的 `plugins/` 文件夹并重启服务器
+1. 从 [Releases](https://github.com/spa77k/mc-hpview/releases) 下载 `hpview-1.0.1.jar`。
+2. 将 JAR 文件放入服务器的 `plugins/` 目录中。
+3. 重启服务器。
 
 ## 命令
 
 | 命令 | 说明 | 权限 |
 |---|---|---|
-| `/hpview` | 切换自己的显示开关 | `hpview.toggle`（所有人） |
-| `/hpview on` / `/hpview off` | 开启 / 关闭自己的显示 | `hpview.toggle`（所有人） |
+| `/hpview` | 切换自己的生命值显示开关 | `hpview.toggle`（所有人） |
+| `/hpview on` | 开启自己的生命值显示 | `hpview.toggle`（所有人） |
+| `/hpview off` | 关闭自己的生命值显示 | `hpview.toggle`（所有人） |
 | `/hpview reload` | 重新加载 `config.yml` | `hpview.reload`（OP） |
 
-关闭的设置保存在 `plugins/HPView/players.yml` 中，重启后依然有效。
+每个玩家的关闭状态会保存在 `plugins/HPView/players.yml` 中，服务器重启后依然有效。
 
 ## 权限
 
 | 权限 | 说明 | 默认 |
 |---|---|---|
-| `hpview.use` | 显示所攻击目标的生命值 | 所有人 |
-| `hpview.toggle` | 可以用 `/hpview` 切换自己的显示 | 所有人 |
-| `hpview.reload` | 可以使用 `/hpview reload` | OP |
+| `hpview.use` | 攻击目标时显示其生命值 | 所有人 |
+| `hpview.toggle` | 允许使用 `/hpview` 切换自己的生命值显示 | 所有人 |
+| `hpview.reload` | 允许使用 `/hpview reload` 重新加载配置 | OP |
 
 ## 配置（`plugins/HPView/config.yml`）
 
 ```yaml
-# MiniMessage 格式。<name> 目标名称，<hp> 剩余生命值，<max> 最大生命值，<color>...</color> 按剩余生命值变化的颜色
+# MiniMessage 格式。<name>：目标名称，<hp>：剩余生命值，<max>：最大生命值，<color>...</color>：按剩余生命值变化的颜色
 format: "<white><name></white> <color>❤ <hp>/<max></color>"
 
 thresholds:
@@ -66,19 +68,16 @@ decimals: 1          # 生命值的小数位数（0-2）
 show-players: true   # 攻击玩家时也显示
 ```
 
-## 构建
-
-```bash
-mvn -B package
-```
-
-会生成 `target/hpview-1.0.1.jar`。
-
-如需在隔离的 Paper 服务器上验证运行效果，请先放置 `server-data/paper-26.2-129.jar`，然后运行：
-
-```bash
-python3 scripts/test-hpview-paper.py
-```
+| 配置项 | 默认值 | 说明 |
+|---|---|---|
+| `format` | `"<white><name></white> <color>❤ <hp>/<max></color>"` | 动作栏文本格式（MiniMessage 格式）。支持的占位符：`<name>`、`<hp>`、`<max>`、`<color>` |
+| `thresholds.high` | `0.5` | 高生命值颜色的比例阈值（50% 及以上） |
+| `thresholds.low` | `0.25` | 中生命值颜色的比例阈值（25% 及以上，低于此值使用低生命值颜色） |
+| `colors.high` | `"#55FF55"` | 生命值比例达到或超过 `thresholds.high` 时的颜色代码 |
+| `colors.mid` | `"#FFFF55"` | 生命值比例在 `thresholds.low` 与 `thresholds.high` 之间时的颜色代码 |
+| `colors.low` | `"#FF5555"` | 生命值比例低于 `thresholds.low` 时的颜色代码 |
+| `decimals` | `1` | 显示生命值的小数位数（0-2） |
+| `show-players` | `true` | 攻击其他玩家时是否也显示生命值 |
 
 ## 许可证
 
