@@ -27,7 +27,7 @@
 
 ## 安装
 
-1. 从 [Releases](https://github.com/spa77k/mc-hpview/releases) 下载 `hpview-1.0.0.jar`
+1. 从 [Releases](https://github.com/spa77k/mc-hpview/releases) 下载 `hpview-1.0.1.jar`
 2. 放入服务器的 `plugins/` 文件夹并重启服务器
 
 ## 命令
@@ -72,7 +72,7 @@ show-players: true   # 攻击玩家时也显示
 mvn -B package
 ```
 
-会生成 `target/hpview-1.0.0.jar`。
+会生成 `target/hpview-1.0.1.jar`。
 
 如需在隔离的 Paper 服务器上验证运行效果，请先放置 `server-data/paper-26.2-129.jar`，然后运行：
 

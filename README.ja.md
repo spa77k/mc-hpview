@@ -27,7 +27,7 @@ PaperMC サーバー向けの、攻撃した相手の残りHPをアクション�
 
 ## 導入
 
-1. [Releases](https://github.com/spa77k/mc-hpview/releases) から `hpview-1.0.0.jar` をダウンロードする
+1. [Releases](https://github.com/spa77k/mc-hpview/releases) から `hpview-1.0.1.jar` をダウンロードする
 2. サーバーの `plugins/` に置いて、サーバーを再起動する
 
 ## コマンド
@@ -72,7 +72,7 @@ show-players: true   # プレイヤーを攻撃したときも表示する
 mvn -B package
 ```
 
-`target/hpview-1.0.0.jar` ができます。
+`target/hpview-1.0.1.jar` ができます。
 
 隔離した Paper での動作確認は、`server-data/paper-26.2-129.jar` を置いてから次のコマンドで行えます。
 

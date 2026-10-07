@@ -25,7 +25,7 @@ def main():
     plugins.mkdir(parents=True)
     for source, target in (
         (SOURCE / "paper-26.2-129.jar", WORK / "paper.jar"),
-        (ROOT / "target/hpview-1.0.0.jar", plugins / "HPView.jar"),
+        (ROOT / "target/hpview-1.0.1.jar", plugins / "HPView.jar"),
     ):
         shutil.copy2(source, target)
     with zipfile.ZipFile(plugins / "HPViewProbe.jar", "w") as jar:

@@ -27,7 +27,7 @@
 
 ## 설치
 
-1. [Releases](https://github.com/spa77k/mc-hpview/releases)에서 `hpview-1.0.0.jar`를 다운로드합니다
+1. [Releases](https://github.com/spa77k/mc-hpview/releases)에서 `hpview-1.0.1.jar`를 다운로드합니다
 2. 서버의 `plugins/` 폴더에 넣고 서버를 재시작합니다
 
 ## 명령어
@@ -72,7 +72,7 @@ show-players: true   # 플레이어를 공격할 때도 표시
 mvn -B package
 ```
 
-`target/hpview-1.0.0.jar`가 생성됩니다.
+`target/hpview-1.0.1.jar`가 생성됩니다.
 
 격리된 Paper 서버에서 동작을 확인하려면 `server-data/paper-26.2-129.jar`를 넣은 뒤 다음 명령을 실행합니다.
 

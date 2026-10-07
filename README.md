@@ -27,7 +27,7 @@ Zombie ❤ 12.0/20.0
 
 ## Installation
 
-1. Download `hpview-1.0.0.jar` from [Releases](https://github.com/spa77k/mc-hpview/releases)
+1. Download `hpview-1.0.1.jar` from [Releases](https://github.com/spa77k/mc-hpview/releases)
 2. Put it in the server's `plugins/` folder and restart the server
 
 ## Commands
@@ -72,7 +72,7 @@ show-players: true   # also show HP when attacking players
 mvn -B package
 ```
 
-This produces `target/hpview-1.0.0.jar`.
+This produces `target/hpview-1.0.1.jar`.
 
 To verify behavior on an isolated Paper server, place `server-data/paper-26.2-129.jar` and run:
 
